@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slug Planner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Chango&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">🐌</span>
+    <span class="brand-name">Slug Planner</span>
+    <span class="brand-sub">UC Santa Cruz</span>
+  </div>
+  <div class="topbar-controls">
+    <label class="field">
+      <span>Quarter</span>
+      <select id="termSelect"></select>
+    </label>
+    <button id="addClassBtn" class="btn btn-primary">+ Add class</button>
+  </div>
+</header>
+
+<!-- Class picker drawer -->
+<div id="drawer" class="drawer" hidden>
+  <div class="drawer-inner">
+    <div class="drawer-head">
+      <h2>Add a class</h2>
+      <button id="closeDrawer" class="icon-btn" aria-label="Close">✕</button>
+    </div>
+    <div class="drawer-filters">
+      <label class="field">
+        <span>Subject</span>
+        <select id="subjectSelect"><option value="">All subjects</option></select>
+      </label>
+      <label class="field grow">
+        <span>Search</span>
+        <input id="courseSearch" type="search" placeholder="e.g. 19A, psych, calculus">
+      </label>
+    </div>
+    <ul id="courseList" class="course-list"></ul>
+  </div>
+</div>
+
+<main class="stage">
+  <button id="prevPlan" class="arrow-btn" aria-label="Previous plan">◀</button>
+
+  <section class="plan-wrap">
+    <div class="plan-frame">
+      <div class="plan-card">
+        <div class="cal-head">
+          <div class="cal-gutter"></div>
+          <div class="cal-days" id="calDays"></div>
+        </div>
+        <div class="cal-body" id="calBody">
+          <div class="cal-gutter" id="calGutter"></div>
+          <div class="cal-grid" id="calGrid"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="plan-meta">
+      <div class="plan-title">
+        <input id="planName" class="plan-name" value="PLAN A" spellcheck="false">
+        <span id="planIndex" class="plan-index">1 / 1</span>
+      </div>
+      <div class="plan-actions">
+        <button id="newPlan" class="btn btn-ghost">+ New plan</button>
+        <button id="dupPlan" class="btn btn-ghost">Duplicate</button>
+        <button id="delPlan" class="btn btn-ghost danger">Delete</button>
+        <span id="planUnits" class="plan-units"></span>
+      </div>
+    </div>
+  </section>
+
+  <button id="nextPlan" class="arrow-btn" aria-label="Next plan">▶</button>
+</main>
+
+<section class="tray" id="tray">
+  <div class="tray-empty" id="trayEmpty">
+    No classes yet. Hit <strong>+ Add class</strong> up top, then drag a section onto your plan.
+  </div>
+</section>
+
+<!-- Discussion chooser popover -->
+<div id="disChooser" class="popover" hidden></div>
+
+<script src="app.js"></script>
+</body>
+</html>
