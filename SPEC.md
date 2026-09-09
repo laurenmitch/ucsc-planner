@@ -1,6 +1,6 @@
 # UCSC Schedule Planner — Build Spec
 
-Status: data pipeline built (scraper + GitHub repo + 6h Actions). Knowi datasource + app not yet built. Last updated 2026-09-09.
+Status: data pipeline + Knowi datasets built. Local prototype working. Knowi App not yet built. Last updated 2026-09-09.
 Knowi account: `lauren` (lauren@knowi.com).
 
 ## Goal
@@ -43,6 +43,20 @@ UCSC Schedule of Classes: https://pisa.ucsc.edu/class_search/index.php
 3. **Knowi App** reads the three datasets via its asset allowlist.
 
 ## Datasets
+
+Knowi (account `lauren`, datasource "UCSC Planner Feed", REST host
+https://raw.githubusercontent.com/laurenmitch/ucsc-planner/main, refreshed every 6h):
+
+| dataset | id | rows (2026-09-09) |
+|---|---|---|
+| UCSC Terms | 183239 | 1 |
+| UCSC Classes | 183240 | 1514 |
+| UCSC Sections | 183241 | 1431 |
+
+Knowi typed `section` as Integer ("01" -> 1); the app zero-pads it. `start_time`/`end_time`
+stayed strings, weekday flags are Boolean, `meeting_start/end` and `scraped_at` are Date.
+Classes also carries two Cloud9QL helper columns Lauren added: `class_nbr_str`, `course_check`.
+
 
 ### terms
 | field | example |
