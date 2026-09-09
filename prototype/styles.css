@@ -102,10 +102,10 @@ button, input, select { font: inherit; color: inherit; }
   border: 2px solid; border-bottom: 0; border-right: 0;
 }
 .cal-days .day:last-child { border-right: 2px solid; }
-.cal-body { display: grid; grid-template-columns: 54px 1fr; max-height: 520px; overflow-y: auto; overscroll-behavior: contain; }
-#calGutter { position: relative; font-size: 11px; color: var(--muted); font-weight: 600; }
+.cal-body { display: grid; grid-template-columns: 54px 1fr; max-height: 520px; overflow-y: auto; overscroll-behavior: contain; padding-top: 8px; }
+#calGutter { position: relative; font-size: 11px; color: var(--muted); font-weight: 600; margin-top: -8px; padding-top: 8px; }
 #calGutter .hour { position: absolute; right: 8px; transform: translateY(-50%); }
-.cal-grid { position: relative; display: grid; grid-template-columns: repeat(7, 1fr); border-top: 2px solid; }
+.cal-grid { position: relative; display: grid; grid-template-columns: repeat(7, 1fr); border-top: 2px solid; margin-top: -8px; }
 .cal-col { position: relative; border-left: 2px solid; background-image: repeating-linear-gradient(to bottom, var(--line) 0 1px, transparent 1px var(--hour-px)); }
 .cal-col:last-child { border-right: 2px solid; }
 .cal-col.drop-ok { background-color: rgba(91,191,142,.14); }
