@@ -82,16 +82,25 @@ button, input, select { font: inherit; color: inherit; }
 
 .plan-wrap { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
 .plan-frame {
+  --plan-sat: 100%;
+  --gray: #8f8a91;
+  --f-orange: color-mix(in srgb, var(--orange) var(--plan-sat), var(--gray));
+  --f-pink: color-mix(in srgb, var(--pink) var(--plan-sat), var(--gray));
+  --f-magenta: color-mix(in srgb, var(--magenta) var(--plan-sat), var(--gray));
   padding: 18px 18px 30px;
   border-radius: 26px;
   background:
     radial-gradient(circle at 12% 18%, rgba(255,255,255,.18) 0 2px, transparent 3px),
     radial-gradient(circle at 78% 70%, rgba(255,255,255,.14) 0 2px, transparent 3px),
-    linear-gradient(180deg, var(--orange) 0%, var(--orange) 78%, var(--pink) 100%);
-  box-shadow: 0 18px 40px rgba(216,52,138,.28);
+    linear-gradient(180deg, var(--f-orange) 0%, var(--f-orange) 78%, var(--f-pink) 100%);
+  box-shadow: 0 18px 40px color-mix(in srgb, var(--f-pink) 28%, transparent);
+  transition: background .25s ease, box-shadow .25s ease;
 }
 .plan-card {
-  background: linear-gradient(180deg, var(--cream) 0%, #f5ede8 55%, #f2dde6 100%);
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--cream) var(--plan-sat), #ebe9ea) 0%,
+    color-mix(in srgb, #f5ede8 var(--plan-sat), #e9e7e8) 55%,
+    color-mix(in srgb, #f2dde6 var(--plan-sat), #e6e3e5) 100%);
   border-radius: 18px; padding: 16px; overflow: hidden;
 }
 .cal-head { display: grid; grid-template-columns: 54px 1fr; }
@@ -114,7 +123,7 @@ button, input, select { font: inherit; color: inherit; }
 
 /* gradient border trick: columns fade purple -> blue left to right */
 .cal-days .day, .cal-col { border-color: var(--col-color, var(--magenta)); }
-.cal-grid { border-color: var(--magenta); }
+.cal-grid { border-color: var(--f-magenta); }
 
 .block {
   position: absolute; left: 4px; right: 4px; border-radius: 8px; padding: 5px 7px; overflow: hidden;

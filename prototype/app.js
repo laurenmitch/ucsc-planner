@@ -46,6 +46,13 @@ function lighten(hex, amt = 0.22) {
   r = Math.round(r + (255 - r) * amt); g = Math.round(g + (255 - g) * amt); b = Math.round(b + (255 - b) * amt);
   return `rgb(${r},${g},${b})`;
 }
+function nextPlanLetter() {
+  const used = new Set(state.plans.map((p) => (p.name.match(/^PLAN\s+([A-Z])\b/i) || [])[1]).filter(Boolean).map((x) => x.toUpperCase()));
+  for (let i = 0; i < 26; i++) { const L = String.fromCharCode(65 + i); if (!used.has(L)) return L; }
+  return String(state.plans.length + 1);
+}
+// 1 = full color, fades toward gray as plans go right
+function planSaturation(idx) { return Math.max(0.12, 1 - idx * 0.28); }
 function planCountFor(classNbr) { return state.plans.filter((p) => p.picks && classNbr in p.picks).length; }
 
 // meetings for a placed lecture (+ its extra meetings) and chosen dis
@@ -112,6 +119,15 @@ function renderPlan() {
   $("#planIndex").textContent = `${state.current + 1} / ${state.plans.length}`;
   $("#prevPlan").disabled = state.current === 0;
   $("#nextPlan").disabled = state.current === state.plans.length - 1;
+  $("#newPlan").textContent = `+ Make a plan ${nextPlanLetter()}`;
+  const sat = planSaturation(state.current);
+  document.querySelector(".plan-frame").style.setProperty("--plan-sat", Math.round(sat * 100) + "%");
+  document.querySelectorAll(".cal-days .day, .cal-col").forEach((n) => {
+    const base = n.dataset.baseColor || n.style.getPropertyValue("--col-color");
+    n.dataset.baseColor = base;
+    const mixed = `color-mix(in srgb, ${base} ${Math.round(sat * 100)}%, #8f8a91)`;
+    n.style.setProperty("--col-color", mixed); if (n.classList.contains("day")) n.style.color = mixed;
+  });
 
   document.querySelectorAll(".block").forEach((b) => b.remove());
   const all = [];
@@ -217,7 +233,7 @@ document.addEventListener("click", (e) => { const pop = $("#disChooser"); if (!p
 function wirePlans() {
   $("#prevPlan").onclick = () => { if (state.current > 0) { state.current--; save(); renderAll(); } };
   $("#nextPlan").onclick = () => { if (state.current < state.plans.length - 1) { state.current++; save(); renderAll(); } };
-  $("#newPlan").onclick = () => { state.plans.push({ id: Date.now(), name: "PLAN " + String.fromCharCode(65 + state.plans.length), term: state.term, picks: {} }); state.current = state.plans.length - 1; save(); renderAll(); };
+  $("#newPlan").onclick = () => { state.plans.push({ id: Date.now(), name: "PLAN " + nextPlanLetter(), term: state.term, picks: {} }); state.current = state.plans.length - 1; save(); renderAll(); };
   $("#dupPlan").onclick = () => { const p = plan(); state.plans.splice(state.current + 1, 0, { id: Date.now(), name: p.name + " copy", term: p.term, picks: { ...p.picks } }); state.current++; save(); renderAll(); };
   $("#delPlan").onclick = () => { if (state.plans.length === 1) { plan().picks = {}; } else { state.plans.splice(state.current, 1); state.current = Math.max(0, state.current - 1); } save(); renderAll(); };
   $("#planName").addEventListener("input", (e) => { plan().name = e.target.value; save(); });
