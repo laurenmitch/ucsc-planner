@@ -1,0 +1,397 @@
+[
+{
+"subject": "AM",
+"subject_name": "Applied Mathematics",
+"term_code": 2268
+},
+{
+"subject": "ANTH",
+"subject_name": "Anthropology",
+"term_code": 2268
+},
+{
+"subject": "APLX",
+"subject_name": "Applied Linguistics",
+"term_code": 2268
+},
+{
+"subject": "ARBC",
+"subject_name": "Arabic",
+"term_code": 2268
+},
+{
+"subject": "ART",
+"subject_name": "Art",
+"term_code": 2268
+},
+{
+"subject": "ARTG",
+"subject_name": "Art&Des:Games&PlayableMedia",
+"term_code": 2268
+},
+{
+"subject": "ASTR",
+"subject_name": "Astronomy and Astrophysics",
+"term_code": 2268
+},
+{
+"subject": "BIOC",
+"subject_name": "Biochemistry and Molecular Bio",
+"term_code": 2268
+},
+{
+"subject": "BIOE",
+"subject_name": "Biology:Ecology & Evolutionary",
+"term_code": 2268
+},
+{
+"subject": "BIOL",
+"subject_name": "Biology: Molecular Cell & Dev",
+"term_code": 2268
+},
+{
+"subject": "BME",
+"subject_name": "Biomolecular Engineering",
+"term_code": 2268
+},
+{
+"subject": "CHEM",
+"subject_name": "Chemistry and Biochemistry",
+"term_code": 2268
+},
+{
+"subject": "CHIN",
+"subject_name": "Chinese",
+"term_code": 2268
+},
+{
+"subject": "CLNI",
+"subject_name": "College Nine",
+"term_code": 2268
+},
+{
+"subject": "CMMU",
+"subject_name": "Community Studies",
+"term_code": 2268
+},
+{
+"subject": "CMPM",
+"subject_name": "Computational Media",
+"term_code": 2268
+},
+{
+"subject": "COWL",
+"subject_name": "Cowell College",
+"term_code": 2268
+},
+{
+"subject": "CRES",
+"subject_name": "Critical Race & Ethnic Studies",
+"term_code": 2268
+},
+{
+"subject": "CRSN",
+"subject_name": "Carson College",
+"term_code": 2268
+},
+{
+"subject": "CRWN",
+"subject_name": "Crown College",
+"term_code": 2268
+},
+{
+"subject": "CSE",
+"subject_name": "Computer Science & Engineering",
+"term_code": 2268
+},
+{
+"subject": "CSP",
+"subject_name": "Coastal Science and Policy",
+"term_code": 2268
+},
+{
+"subject": "CT",
+"subject_name": "Creative Technologies",
+"term_code": 2268
+},
+{
+"subject": "DANM",
+"subject_name": "Digital Arts and New Media",
+"term_code": 2268
+},
+{
+"subject": "EART",
+"subject_name": "Earth Sciences",
+"term_code": 2268
+},
+{
+"subject": "ECE",
+"subject_name": "Electrical & Computer Engineer",
+"term_code": 2268
+},
+{
+"subject": "ECON",
+"subject_name": "Economics",
+"term_code": 2268
+},
+{
+"subject": "EDUC",
+"subject_name": "Education",
+"term_code": 2268
+},
+{
+"subject": "ENVS",
+"subject_name": "Environmental Studies",
+"term_code": 2268
+},
+{
+"subject": "ESCI",
+"subject_name": "Environmental Sciences",
+"term_code": 2268
+},
+{
+"subject": "FILM",
+"subject_name": "Film and Digital Media",
+"term_code": 2268
+},
+{
+"subject": "FMST",
+"subject_name": "Feminist Studies",
+"term_code": 2268
+},
+{
+"subject": "FREN",
+"subject_name": "French",
+"term_code": 2268
+},
+{
+"subject": "GCH",
+"subject_name": "Global and Community Health",
+"term_code": 2268
+},
+{
+"subject": "GIST",
+"subject_name": "Geographic Information Systems",
+"term_code": 2268
+},
+{
+"subject": "GRAD",
+"subject_name": "Graduate",
+"term_code": 2268
+},
+{
+"subject": "GREE",
+"subject_name": "Greek",
+"term_code": 2268
+},
+{
+"subject": "HAVC",
+"subject_name": "History of Art&Visual Culture",
+"term_code": 2268
+},
+{
+"subject": "HCI",
+"subject_name": "Human Computer Interaction",
+"term_code": 2268
+},
+{
+"subject": "HEBR",
+"subject_name": "Hebrew",
+"term_code": 2268
+},
+{
+"subject": "HIS",
+"subject_name": "History",
+"term_code": 2268
+},
+{
+"subject": "HISC",
+"subject_name": "History of Consciousness",
+"term_code": 2268
+},
+{
+"subject": "HTEC",
+"subject_name": "Humanizing Technology",
+"term_code": 2268
+},
+{
+"subject": "ITAL",
+"subject_name": "Italian",
+"term_code": 2268
+},
+{
+"subject": "JAPN",
+"subject_name": "Japanese",
+"term_code": 2268
+},
+{
+"subject": "JRLC",
+"subject_name": "John R. Lewis College",
+"term_code": 2268
+},
+{
+"subject": "KRSG",
+"subject_name": "Kresge College",
+"term_code": 2268
+},
+{
+"subject": "LALS",
+"subject_name": "Latin American&Latino Studies",
+"term_code": 2268
+},
+{
+"subject": "LATN",
+"subject_name": "Latin",
+"term_code": 2268
+},
+{
+"subject": "LGST",
+"subject_name": "Legal Studies",
+"term_code": 2268
+},
+{
+"subject": "LING",
+"subject_name": "Linguistics",
+"term_code": 2268
+},
+{
+"subject": "LIT",
+"subject_name": "Literature",
+"term_code": 2268
+},
+{
+"subject": "MATH",
+"subject_name": "Mathematics",
+"term_code": 2268
+},
+{
+"subject": "MERR",
+"subject_name": "Merrill College",
+"term_code": 2268
+},
+{
+"subject": "METX",
+"subject_name": "Microbiol & Environ Toxicology",
+"term_code": 2268
+},
+{
+"subject": "MSE",
+"subject_name": "Materials Sci & Eng",
+"term_code": 2268
+},
+{
+"subject": "MUSC",
+"subject_name": "Music",
+"term_code": 2268
+},
+{
+"subject": "NLP",
+"subject_name": "Natural Language Processing",
+"term_code": 2268
+},
+{
+"subject": "OAKS",
+"subject_name": "Oakes College",
+"term_code": 2268
+},
+{
+"subject": "OCEA",
+"subject_name": "Ocean Sciences",
+"term_code": 2268
+},
+{
+"subject": "PBS",
+"subject_name": "Physical & Biological Sciences",
+"term_code": 2268
+},
+{
+"subject": "PHIL",
+"subject_name": "Philosophy",
+"term_code": 2268
+},
+{
+"subject": "PHYE",
+"subject_name": "Physical Education",
+"term_code": 2268
+},
+{
+"subject": "PHYS",
+"subject_name": "Physics",
+"term_code": 2268
+},
+{
+"subject": "POLI",
+"subject_name": "Politics",
+"term_code": 2268
+},
+{
+"subject": "PRTR",
+"subject_name": "Porter College",
+"term_code": 2268
+},
+{
+"subject": "PSYC",
+"subject_name": "Psychology",
+"term_code": 2268
+},
+{
+"subject": "SCIC",
+"subject_name": "Science Communication",
+"term_code": 2268
+},
+{
+"subject": "SOCD",
+"subject_name": "Social Documentation",
+"term_code": 2268
+},
+{
+"subject": "SOCY",
+"subject_name": "Sociology",
+"term_code": 2268
+},
+{
+"subject": "SPAN",
+"subject_name": "Spanish",
+"term_code": 2268
+},
+{
+"subject": "SPHS",
+"subject_name": "Spanish for Heritage Speakers",
+"term_code": 2268
+},
+{
+"subject": "STAT",
+"subject_name": "Statistics",
+"term_code": 2268
+},
+{
+"subject": "STEV",
+"subject_name": "Stevenson College",
+"term_code": 2268
+},
+{
+"subject": "THEA",
+"subject_name": "Theater Arts",
+"term_code": 2268
+},
+{
+"subject": "TIM",
+"subject_name": "Technology & Info Management",
+"term_code": 2268
+},
+{
+"subject": "UCDC",
+"subject_name": "UCDC",
+"term_code": 2268
+},
+{
+"subject": "VAST",
+"subject_name": "Visualizing Abolition Studies",
+"term_code": 2268
+},
+{
+"subject": "WRIT",
+"subject_name": "Writing",
+"term_code": 2268
+}
+]
