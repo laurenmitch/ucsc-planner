@@ -16,6 +16,7 @@
   --hour-px: 32px;
   --cal-hours: 15;
   --cal-height: 480px;
+  --cal-tail: 8px; /* room for the 10P label below the last hour line */
   --topbar-h: 73px;
 }
 
@@ -302,7 +303,7 @@ button, select, input{
 .calendar-body{
   flex: 1;
   min-height: 0;
-  max-height: var(--cal-height);
+  max-height: calc(var(--cal-height) + var(--cal-tail));
   overflow-y: auto;
   display: grid;
   grid-template-columns: 54px repeat(7, 1fr);
@@ -316,7 +317,7 @@ button, select, input{
 
 .calendar-gutter{
   position: relative;
-  height: var(--cal-height);
+  height: calc(var(--cal-height) + var(--cal-tail));
   width: 54px;
   border-right: 2px solid var(--ink);
 }
@@ -335,7 +336,7 @@ button, select, input{
 
 .calendar-col{
   position: relative;
-  height: var(--cal-height);
+  height: calc(var(--cal-height) + var(--cal-tail));
   border-left: 2px solid var(--ink);
   background: var(--surface);
 }
