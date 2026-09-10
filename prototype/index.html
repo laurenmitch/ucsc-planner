@@ -5,31 +5,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Slug Planner</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Chango&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <header class="topbar">
-  <div class="brand">
-    <span class="brand-mark">🐌</span>
-    <span class="brand-name">Slug Planner</span>
-    <span class="brand-sub">UC Santa Cruz</span>
-  </div>
+  <div class="brand">SLUG PLANNER</div>
   <div class="topbar-controls">
     <label class="field">
       <span>Quarter</span>
       <select id="termSelect"></select>
     </label>
-    <button id="addClassBtn" class="btn btn-primary">+ Add class</button>
+    <button id="addClassBtn" class="btn btn-ink">ADD CLASS <span class="arrow">→</span></button>
   </div>
+  <div class="brand-right">UC SANTA CRUZ</div>
 </header>
 
 <!-- Class picker drawer -->
 <div id="drawer" class="drawer" hidden>
   <div class="drawer-inner">
     <div class="drawer-head">
-      <h2>Add a class</h2>
+      <h2>ADD A CLASS</h2>
       <button id="closeDrawer" class="icon-btn" aria-label="Close">✕</button>
     </div>
     <div class="drawer-filters">
@@ -39,52 +36,91 @@
       </label>
       <label class="field grow">
         <span>Search</span>
-        <input id="courseSearch" type="search" placeholder="e.g. 19A, psych, calculus">
+        <input id="courseSearch" type="search" placeholder="19A, psych, calculus…">
       </label>
     </div>
     <ul id="courseList" class="course-list"></ul>
   </div>
 </div>
 
+<div class="layout">
+<div class="plan-pane">
 <main class="stage">
-  <button id="prevPlan" class="arrow-btn" aria-label="Previous plan">◀</button>
-
-  <section class="plan-wrap">
-    <div class="plan-frame">
-      <div class="plan-card">
-        <div class="cal-head">
-          <div class="cal-gutter"></div>
-          <div class="cal-days" id="calDays"></div>
-        </div>
-        <div class="cal-body" id="calBody">
-          <div class="cal-gutter" id="calGutter"></div>
-          <div class="cal-grid" id="calGrid"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="plan-meta">
-      <div class="plan-title">
-        <input id="planName" class="plan-name" value="PLAN A" spellcheck="false">
-        <span id="planIndex" class="plan-index">1 / 1</span>
-      </div>
-      <div class="plan-actions">
-        <button id="newPlan" class="btn btn-ghost">+ New plan</button>
-        <button id="dupPlan" class="btn btn-ghost">Duplicate</button>
-        <button id="delPlan" class="btn btn-ghost danger">Delete</button>
-        <span id="planUnits" class="plan-units"></span>
-      </div>
-    </div>
-  </section>
-
-  <button id="nextPlan" class="arrow-btn" aria-label="Next plan">▶</button>
+  <button id="prevPlan" class="arrow-btn" aria-label="Previous plan">←</button>
+  <div class="track-wrap">
+    <div id="track" class="track"></div>
+  </div>
+  <button id="nextPlan" class="arrow-btn" aria-label="Next plan">→</button>
 </main>
 
+<div class="plan-bar">
+  <div class="plan-order">
+    <span id="planIndex" class="plan-index">1 / 1</span>
+    <button id="reorderBtn" class="btn btn-link" title="Drag your plans into a new order">REORDER</button>
+    <div id="reorderPanel" class="reorder" hidden>
+      <h4>Drag plans into order</h4>
+      <ul id="reorderList" class="reorder-list"></ul>
+      <button id="reorderDone" class="btn btn-ink">DONE</button>
+    </div>
+  </div>
+  <div class="plan-actions">
+    <button id="newPlan" class="btn btn-ink">+ MAKE A PLAN B</button>
+    <button id="dupPlan" class="btn btn-link">DUPLICATE</button>
+    <button id="delPlan" class="btn btn-link danger">DELETE</button>
+  </div>
+</div>
+
+<template id="slideTpl">
+  <section class="slide">
+    <div class="plan-meta">
+      <input class="plan-name" value="PLAN A" spellcheck="false" aria-label="Plan name">
+      <span class="plan-units"></span>
+    </div>
+    <div class="plan-card">
+      <div class="cal-head"><div class="cal-gutter"></div><div class="cal-days"></div></div>
+      <div class="cal-body"><div class="cal-gutter gutter-hours"></div><div class="cal-grid"></div></div>
+    </div>
+  </section>
+</template>
+
+</div><!-- /plan-pane -->
+
 <section class="tray" id="tray">
+  <div class="tray-head">
+    <h2>CLASS BANK</h2>
+    <span class="tray-hint">DRAG A SECTION ONTO A PLAN <span class="arrow">→</span></span>
+  </div>
   <div class="tray-empty" id="trayEmpty">
-    No classes yet. Hit <strong>+ Add class</strong> up top, then drag a section onto your plan.
+    Nothing here yet. Hit <strong>ADD CLASS</strong> up top.
   </div>
 </section>
+</div><!-- /layout -->
+
+<!-- Sammy, crawling along the bottom edge -->
+<div class="slug-lane">
+  <div class="slug-crawl" id="slug" title="Sammy" role="button" aria-label="Poke Sammy the slug">
+    <div class="slug-say" id="slugSay" hidden></div>
+    <svg class="slug" viewBox="0 0 64 30" width="64" height="30">
+      <g class="slug-body">
+        <!-- slime trail -->
+        <path d="M2 26 Q 10 24, 18 26 T 34 26" fill="none" stroke="#b9ba1f" stroke-width="1.5" stroke-linecap="round" opacity=".55"/>
+        <!-- body -->
+        <path d="M4 26 C 6 18, 18 10, 34 10 C 46 10, 56 15, 60 22 C 61 25, 58 27, 54 27 L 8 27 C 4 27, 3 27, 4 26 Z" fill="#e8c51a" stroke="#11170d" stroke-width="1.6" stroke-linejoin="round"/>
+        <!-- mantle -->
+        <path d="M28 12 C 34 9, 44 10, 50 15 C 44 14, 36 14, 28 12 Z" fill="#c9a815" opacity=".8"/>
+        <!-- pneumostome -->
+        <circle cx="44" cy="15" r="1.2" fill="#11170d"/>
+        <!-- eyestalks -->
+        <g class="slug-eyes">
+          <path d="M52 15 L 55 6" stroke="#11170d" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M56 17 L 61 9" stroke="#11170d" stroke-width="1.6" stroke-linecap="round"/>
+          <circle cx="55" cy="5.5" r="1.6" fill="#11170d"/>
+          <circle cx="61" cy="8.5" r="1.6" fill="#11170d"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+</div>
 
 <!-- Discussion chooser popover -->
 <div id="disChooser" class="popover" hidden></div>
