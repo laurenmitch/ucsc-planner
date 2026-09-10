@@ -21,7 +21,7 @@
 
   var data = null;
   var appState = null;
-  var ui = { drawerOpen:false, drawerSubject:'', drawerSearch:'', chooser:null, dragClassNbr:null };
+  var ui = { drawerOpen:false, drawerSubject:'', drawerSearch:'', chooser:null, dragClassNbr:null, reorderOpen:false, reorderDragId:null, reorderCurrentId:null };
   var loadingRotation = { order: [], index: 0, timer: null };
   var sammyState = { pokeCount: 0, lastLine: null, bubbleTimer: null, flinchTimer: null, decayTimer: null };
 
@@ -55,6 +55,31 @@
     el('plan-duplicate').addEventListener('click', duplicatePlan);
     el('plan-delete').addEventListener('click', deleteOrClearPlan);
 
+    el('plan-reorder-btn').addEventListener('click', function(){
+      if(ui.reorderOpen){ closeReorderPanel(); } else { openReorderPanel(); }
+    });
+    el('reorder-done').addEventListener('click', closeReorderPanel);
+
+    var reorderList = el('reorder-list');
+    reorderList.addEventListener('dragover', function(e){
+      if(!ui.reorderDragId) return;
+      e.preventDefault();
+      var targetRow = e.target.closest && e.target.closest('.reorder-row');
+      if(!targetRow) return;
+      var targetId = targetRow.dataset.planId;
+      if(targetId === ui.reorderDragId) return;
+      var fromIdx = appState.plans.findIndex(function(p){ return p.id === ui.reorderDragId; });
+      var toIdx = appState.plans.findIndex(function(p){ return p.id === targetId; });
+      if(fromIdx === -1 || toIdx === -1) return;
+      var moved = appState.plans.splice(fromIdx, 1)[0];
+      appState.plans.splice(toIdx, 0, moved);
+      syncCurrentPlanIndexById();
+      renderReorderList();
+      var newRow = reorderList.querySelector('.reorder-row[data-plan-id="' + ui.reorderDragId + '"]');
+      if(newRow) newRow.classList.add('dragging');
+    });
+    reorderList.addEventListener('drop', function(e){ e.preventDefault(); });
+
     var nameEl = el('plan-name');
     nameEl.addEventListener('blur', function(){
       var plan = currentPlan();
@@ -72,22 +97,37 @@
     document.addEventListener('keydown', function(e){
       if(e.key === 'Escape'){
         if(ui.chooser){ closeChooser(); }
+        else if(ui.reorderOpen){ closeReorderPanel(); }
         else if(ui.drawerOpen){ closeDrawer(); }
       }
     });
 
     document.addEventListener('dragstart', function(e){
       var card = e.target.closest && e.target.closest('.lecture-card[draggable="true"]');
-      if(!card) return;
-      var classNbr = Number(card.dataset.classNbr);
-      ui.dragClassNbr = classNbr;
-      try{ e.dataTransfer.setData('text/plain', String(classNbr)); }catch(err){}
-      e.dataTransfer.effectAllowed = 'copy';
-      el('calendar').classList.add('armed');
+      if(card){
+        var classNbr = Number(card.dataset.classNbr);
+        ui.dragClassNbr = classNbr;
+        try{ e.dataTransfer.setData('text/plain', String(classNbr)); }catch(err){}
+        e.dataTransfer.effectAllowed = 'copy';
+        el('calendar').classList.add('armed');
+        return;
+      }
+      var row = e.target.closest && e.target.closest('.reorder-row');
+      if(row){
+        ui.reorderDragId = row.dataset.planId;
+        try{ e.dataTransfer.setData('text/plain', row.dataset.planId); }catch(err){}
+        e.dataTransfer.effectAllowed = 'move';
+        row.classList.add('dragging');
+      }
     });
     document.addEventListener('dragend', function(){
       el('calendar').classList.remove('armed');
       ui.dragClassNbr = null;
+      if(ui.reorderDragId){
+        ui.reorderDragId = null;
+        save();
+        renderPlanArea();
+      }
     });
 
     var calendar = el('calendar');
@@ -108,6 +148,23 @@
 
     document.addEventListener('click', function(e){
       var t = e.target;
+
+      if(ui.reorderOpen){
+        var panelEl = el('reorder-panel');
+        var reorderBtnEl = el('plan-reorder-btn');
+        if(!panelEl.contains(t) && t !== reorderBtnEl && !reorderBtnEl.contains(t)){
+          closeReorderPanel();
+        }
+      }
+
+      var reorderJump = t.closest && t.closest('.reorder-row-main');
+      if(reorderJump){
+        var pid = reorderJump.dataset.jump;
+        var jumpIdx = appState.plans.findIndex(function(p){ return p.id === pid; });
+        if(jumpIdx !== -1){ appState.currentPlanIndex = jumpIdx; save(); renderPlanArea(); renderClassBank(); }
+        closeReorderPanel();
+        return;
+      }
 
       var removeBtn = t.closest && t.closest('.block-remove');
       if(removeBtn){
@@ -455,6 +512,48 @@
     save(); renderPlanArea(); renderClassBank();
   }
 
+  /* ---------------- reorder panel ---------------- */
+
+  function openReorderPanel(){
+    if(appState.plans.length <= 1) return;
+    ui.reorderOpen = true;
+    ui.reorderCurrentId = currentPlan().id;
+    renderReorderList();
+    el('reorder-panel').hidden = false;
+    el('reorder-panel').setAttribute('aria-hidden', 'false');
+  }
+
+  function closeReorderPanel(){
+    ui.reorderOpen = false;
+    ui.reorderDragId = null;
+    el('reorder-panel').hidden = true;
+    el('reorder-panel').setAttribute('aria-hidden', 'true');
+  }
+
+  function syncCurrentPlanIndexById(){
+    var idx = appState.plans.findIndex(function(p){ return p.id === ui.reorderCurrentId; });
+    if(idx !== -1) appState.currentPlanIndex = idx;
+  }
+
+  function renderReorderList(){
+    var listEl = el('reorder-list');
+    listEl.innerHTML = '';
+    appState.plans.forEach(function(plan){
+      var count = Object.keys(plan.picks).length;
+      var row = document.createElement('div');
+      row.className = 'reorder-row';
+      row.draggable = true;
+      row.dataset.planId = plan.id;
+      row.innerHTML =
+        '<span class="reorder-grip" aria-hidden="true">☰</span>' +
+        '<button type="button" class="reorder-row-main" data-jump="' + escapeAttr(plan.id) + '">' +
+          '<span class="reorder-row-name">' + escapeHtml(plan.name) + '</span>' +
+          '<span class="reorder-row-count">' + count + ' CLASS' + (count !== 1 ? 'ES' : '') + '</span>' +
+        '</button>';
+      listEl.appendChild(row);
+    });
+  }
+
   function renderPlanArea(){
     var plan = currentPlan();
     if(!plan) return;
@@ -479,9 +578,12 @@
     renderCalendar(plan);
 
     el('plan-counter').textContent = (appState.currentPlanIndex + 1) + ' / ' + appState.plans.length;
-    var letterMatch = /^PLAN ([A-Z])$/.exec(plan.name || '');
     el('plan-add').textContent = '+ MAKE A PLAN ' + nextLetter();
     el('plan-delete').textContent = appState.plans.length === 1 ? 'CLEAR PLAN' : ('DELETE ' + plan.name);
+
+    el('plan-reorder-btn').hidden = appState.plans.length <= 1;
+    if(appState.plans.length <= 1 && ui.reorderOpen){ closeReorderPanel(); }
+    if(ui.reorderOpen){ renderReorderList(); }
   }
 
   function roundUnits(n){

@@ -57,7 +57,16 @@
         </div>
 
         <div class="plan-bar">
-          <div class="plan-counter" id="plan-counter">1 / 1</div>
+          <div class="plan-bar-left">
+            <div class="plan-counter" id="plan-counter">1 / 1</div>
+            <button type="button" id="plan-reorder-btn" class="btn" hidden>REORDER</button>
+            <div id="reorder-panel" class="reorder-panel" hidden aria-hidden="true" role="dialog" aria-label="Reorder plans">
+              <div class="reorder-header">
+                <button type="button" id="reorder-done" class="btn btn-primary">DONE</button>
+              </div>
+              <div class="reorder-list" id="reorder-list"></div>
+            </div>
+          </div>
           <div class="plan-actions">
             <button type="button" id="plan-add" class="btn btn-primary">+ MAKE A PLAN B</button>
             <button type="button" id="plan-duplicate" class="btn">DUPLICATE</button>
