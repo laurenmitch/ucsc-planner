@@ -15,6 +15,7 @@
   --hour-px: 32px;
   --cal-hours: 15;
   --cal-height: 480px;
+  --topbar-h: 73px;
 }
 
 *, *::before, *::after{ box-sizing: border-box; }
@@ -190,12 +191,13 @@ button, select, input{
   flex: 1;
   min-height: 0;
   display: flex;
-  align-items: stretch;
+  align-items: flex-start;
 }
 
 .plan-area{
   flex: 1;
   min-width: 0;
+  height: calc(100vh - var(--topbar-h));
   display: flex;
   align-items: stretch;
   position: relative;
@@ -232,6 +234,7 @@ button, select, input{
   justify-content: space-between;
   gap: 16px;
   flex-wrap: wrap;
+  flex-shrink: 0;
 }
 
 .plan-name{
@@ -259,14 +262,14 @@ button, select, input{
 /* ---------- calendar ---------- */
 
 .calendar{
-  flex: 1;
+  flex: 0 1 auto;
   min-height: 0;
   display: flex;
   flex-direction: column;
 }
 
 .calendar-frame{
-  flex: 1;
+  flex: 0 1 auto;
   min-height: 0;
   display: flex;
   flex-direction: column;
@@ -445,6 +448,10 @@ button, select, input{
   border-left: 2px solid var(--ink);
   background: var(--oat);
   padding: 18px 16px 40px;
+  position: sticky;
+  top: 0;
+  height: calc(100vh - var(--topbar-h));
+  max-height: calc(100vh - var(--topbar-h));
   overflow-y: auto;
 }
 
@@ -783,12 +790,15 @@ button, select, input{
 @media (max-width: 900px){
   #app{ height: auto; min-height: 100vh; }
   .layout{ flex-direction: column; height: auto; }
-  .plan-area{ min-height: 70vh; }
+  .plan-area{ height: auto; min-height: 70vh; }
   .plan-content{ min-height: 60vh; }
   .class-bank{
     width: 100%;
     border-left: none;
     border-top: 2px solid var(--ink);
+    position: static;
+    top: auto;
+    height: auto;
     max-height: none;
     overflow-y: visible;
   }
