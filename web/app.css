@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;700&family=Caveat:wght@500;700&display=swap");
 
 /* ============ Slug Planner — poster brutalist styles ============ */
 
@@ -562,6 +562,24 @@ button, select, input{
   margin: 4px 0 12px;
 }
 
+.bank-legend{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 8px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin: -6px 0 12px;
+}
+.bank-legend .card-badge{
+  position: static;
+  transform: none;
+  margin: 0;
+  flex-shrink: 0;
+}
+
 .bank-header{
   border-bottom: 2px solid var(--ink);
   padding-bottom: 10px;
@@ -1051,22 +1069,27 @@ button, select, input{
 }
 .plan-ghost[hidden]{ display: none; }
 .plan-ghost-prev{
-  transform: translateX(calc(-100% + var(--peek))) scale(.94);
+  transform: translateX(-100%) scale(.94);
   transform-origin: right center;
   filter: grayscale(.25);
+  opacity: 0;
 }
 .plan-ghost-next{
-  transform: translateX(calc(100% - var(--peek))) scale(.94);
+  transform: translateX(100%) scale(.94);
   transform-origin: left center;
   filter: grayscale(.65);
+  opacity: 0;
 }
+/* neighbors peek in only while a card is being dragged, so they can be drop targets */
+body.dragging .plan-ghost-prev{ transform: translateX(calc(-100% + var(--peek))) scale(.94); opacity: .45; }
+body.dragging .plan-ghost-next{ transform: translateX(calc(100% - var(--peek))) scale(.94); opacity: .45; }
 .plan-ghost .plan-name{ cursor: default; }
 .plan-ghost .plan-bar{ visibility: hidden; }
 
 .plan-track.slide-next > .plan-content{
-  transform: translateX(calc(-100% + var(--peek))) scale(.94);
+  transform: translateX(-100%) scale(.94);
   transform-origin: right center;
-  opacity: .45;
+  opacity: 0;
   filter: grayscale(.25);
 }
 .plan-track.slide-next .plan-ghost-next{
@@ -1075,9 +1098,9 @@ button, select, input{
   filter: none;
 }
 .plan-track.slide-prev > .plan-content{
-  transform: translateX(calc(100% - var(--peek))) scale(.94);
+  transform: translateX(100%) scale(.94);
   transform-origin: left center;
-  opacity: .45;
+  opacity: 0;
   filter: grayscale(.65);
 }
 .plan-track.slide-prev .plan-ghost-prev{
@@ -1093,7 +1116,7 @@ body.dragging .plan-ghost .calendar-col{
   outline: 2px dashed var(--muted);
   outline-offset: -2px;
 }
-body.dragging .plan-ghost:hover{ opacity: .85; filter: none; }
+body.dragging .plan-ghost:hover{ opacity: .85 !important; filter: none; }
 
 @media (max-width: 900px){
   .plan-ghost{ display: none; }
@@ -1101,3 +1124,43 @@ body.dragging .plan-ghost:hover{ opacity: .85; filter: none; }
 @media (prefers-reduced-motion: reduce){
   .plan-track > .plan-content, .plan-ghost{ transition: none; }
 }
+
+/* ---------- first-time guide ---------- */
+
+.guide{
+  position: relative;
+  margin: 0 0 16px;
+  padding: 10px 30px 10px 14px;
+  border: 2px solid var(--ink);
+  background: #f7f3e3;
+  box-shadow: 3px 3px 0 var(--ink);
+  transform: rotate(-1deg);
+  font-family: "Caveat", "Bradley Hand", "Segoe Script", "Comic Sans MS", cursive;
+  color: var(--ink);
+}
+.guide[hidden]{ display: none; }
+.guide-title{
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0 0 4px;
+}
+.guide-steps{
+  margin: 0;
+  padding-left: 22px;
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+.guide-close{
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  background: transparent;
+  border: none;
+  font-size: 13px;
+  color: var(--ink);
+  cursor: pointer;
+  padding: 2px 4px;
+}
+.guide-close:hover{ background: var(--ink); color: var(--lime); }

@@ -32,7 +32,24 @@
   function init(){
     wireStaticEvents();
     initSammy();
+    initGuide();
     loadData();
+  }
+
+  /* ---------------- first-time guide ---------------- */
+
+  var GUIDE_KEY = 'slugPlanner.guideDismissed';
+
+  function initGuide(){
+    var guide = el('guide');
+    if(!guide) return;
+    var dismissed = false;
+    try{ dismissed = localStorage.getItem(GUIDE_KEY) === '1'; }catch(e){}
+    guide.hidden = dismissed;
+    el('guide-close').addEventListener('click', function(){
+      guide.hidden = true;
+      try{ localStorage.setItem(GUIDE_KEY, '1'); }catch(e){}
+    });
   }
 
   function wireStaticEvents(){

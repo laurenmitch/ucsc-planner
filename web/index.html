@@ -83,9 +83,19 @@
     </main>
 
     <aside class="class-bank" id="class-bank" aria-label="Class bank">
+      <div class="guide" id="guide" hidden role="note" aria-label="Getting started">
+        <button type="button" class="guide-close" id="guide-close" aria-label="Dismiss guide">✕</button>
+        <p class="guide-title">first time here?</p>
+        <ol class="guide-steps">
+          <li>start by adding a class ↑</li>
+          <li>drag your class onto your plan ←</li>
+          <li>make a plan b, just in case</li>
+        </ol>
+      </div>
       <div class="bank-header">
         <h2>CLASS BANK</h2>
         <p class="bank-hint">DRAG A SECTION ONTO A PLAN →</p>
+        <p class="bank-legend" aria-label="Legend"><span class="card-badge">2</span> = NUMBER OF PLANS THE SECTION IS ON <span class="card-badge card-badge-active">2</span> = INCLUDING THIS PLAN</p>
       </div>
       <div class="bank-list" id="bank-list"></div>
     </aside>
