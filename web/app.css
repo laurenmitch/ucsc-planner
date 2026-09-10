@@ -219,6 +219,7 @@ button, select, input{
   font-family: var(--display);
 }
 .plan-nav:hover{ background: var(--ink); color: var(--lime); }
+.plan-nav.plan-nav-off{ visibility: hidden; pointer-events: none; }
 
 .plan-content{
   flex: 1;

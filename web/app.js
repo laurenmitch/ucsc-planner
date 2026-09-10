@@ -502,10 +502,12 @@
   function navigatePlan(delta){
     var n = appState.plans.length;
     if(n < 2 || ui.sliding) return;
-    var target = (appState.currentPlanIndex + delta + n) % n;
+    var target = appState.currentPlanIndex + delta;
+    if(target < 0 || target >= n) return;
     var track = el('plan-track');
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var ghostVisible = el('plan-ghost-next').offsetParent !== null;
+    var ghost = el(delta > 0 ? 'plan-ghost-next' : 'plan-ghost-prev');
+    var ghostVisible = !ghost.hidden && ghost.offsetParent !== null;
     function commit(){
       appState.currentPlanIndex = target;
       save();
@@ -610,6 +612,7 @@
 
     renderCalendar(plan);
     renderGhosts();
+    renderPlanNav();
 
     el('plan-counter').textContent = (appState.currentPlanIndex + 1) + ' / ' + appState.plans.length;
     el('plan-add').textContent = '+ MAKE A PLAN ' + nextLetter();
@@ -639,8 +642,14 @@
     var prev = el('plan-ghost-prev'), next = el('plan-ghost-next');
     if(n < 2){ prev.hidden = true; next.hidden = true; prev.innerHTML = ''; next.innerHTML = ''; return; }
     var i = appState.currentPlanIndex;
-    fillGhost(prev, (i - 1 + n) % n);
-    fillGhost(next, (i + 1) % n);
+    if(i > 0){ fillGhost(prev, i - 1); } else { prev.hidden = true; prev.innerHTML = ''; }
+    if(i < n - 1){ fillGhost(next, i + 1); } else { next.hidden = true; next.innerHTML = ''; }
+  }
+
+  function renderPlanNav(){
+    var n = appState.plans.length, i = appState.currentPlanIndex;
+    el('plan-prev').classList.toggle('plan-nav-off', n < 2 || i === 0);
+    el('plan-next').classList.toggle('plan-nav-off', n < 2 || i === n - 1);
   }
 
   function fillGhost(ghost, idx){
