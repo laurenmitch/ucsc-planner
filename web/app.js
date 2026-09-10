@@ -930,6 +930,7 @@
 
     div.innerHTML =
       '<button type="button" class="block-remove" data-remove="' + b.classNbr + '" aria-label="Remove ' + escapeAttr(b.course) + ' from plan">✕</button>' +
+      (b.conflict ? '<span class="block-conflict-tag">⚠ Conflict</span><br>' : '') +
       '<div class="block-course">' + escapeHtml(b.course) + '</div>' +
       '<div class="block-section">' + escapeHtml(b.sectionLabel || '') + '</div>' +
       '<div class="block-time">' + formatTimeRange(b.start, b.end) + (b.room ? ' · ' + escapeHtml(b.room) : '') + '</div>' +

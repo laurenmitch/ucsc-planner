@@ -381,8 +381,23 @@ button, select, input{
 }
 
 .calendar-block-conflict{
+  border-color: var(--red);
   outline: 3px solid var(--red);
-  outline-offset: -3px;
+  outline-offset: 0;
+  background-image: repeating-linear-gradient(135deg, rgba(200,30,30,.45) 0 5px, transparent 5px 12px);
+  z-index: 4;
+}
+.block-conflict-tag{
+  display: inline-block;
+  margin: 2px 0 3px;
+  padding: 1px 5px;
+  background: var(--red);
+  color: #fff;
+  font-family: var(--display);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.4;
 }
 
 .block-remove{
