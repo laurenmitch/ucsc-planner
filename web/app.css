@@ -361,11 +361,17 @@ button, select, input{
   right: 2px;
   border: 2px solid var(--ink);
   padding: 4px 6px;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
   font-size: 11px;
   line-height: 1.25;
   z-index: 2;
 }
+.calendar-block::-webkit-scrollbar{ width: 5px; }
+.calendar-block::-webkit-scrollbar-thumb{ background: rgba(0,0,0,.35); }
+.calendar-block::-webkit-scrollbar-track{ background: transparent; }
 
 .calendar-block-section{
   border-style: dashed;
@@ -378,9 +384,10 @@ button, select, input{
 }
 
 .block-remove{
-  position: absolute;
-  top: 2px;
-  right: 2px;
+  position: sticky;
+  float: right;
+  top: 0;
+  margin: -2px -4px 0 4px;
   background: transparent;
   border: none;
   color: inherit;

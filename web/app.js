@@ -864,6 +864,7 @@
     div.style.top = top + 'px';
     div.style.height = Math.max(18, bottom - top) + 'px';
     div.style.background = b.color;
+    div.title = b.course + ' · ' + (b.sectionLabel || '') + ' · ' + formatTimeRange(b.start, b.end) + (b.room ? ' · ' + b.room : '');
     var textColor = luminance(b.color) > 0.55 ? '#11170d' : '#f4f1e6';
     div.style.color = textColor;
 
