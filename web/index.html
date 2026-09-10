@@ -96,6 +96,26 @@
 
 <div id="popover-layer" hidden></div>
 
+<div class="sammy-strip" aria-hidden="false">
+  <button type="button" id="sammy" class="sammy" aria-label="Sammy the banana slug. Poke him to say hi.">
+    <span class="sammy-squish">
+      <svg class="sammy-svg" viewBox="0 0 64 40" aria-hidden="true" focusable="false">
+        <path class="sammy-trail" d="M2 33 Q16 31 30 32 T58 31" fill="none" stroke="#e8c51a" stroke-opacity="0.3" stroke-width="4" stroke-linecap="round"></path>
+        <path class="sammy-body" d="M5 31 C4 21 11 14 21 13 C31 12 41 12 49 16 C57 19 61 23 60 28 C59 34 50 37 38 37 C25 37 5 37 5 31 Z" fill="#e8c51a" stroke="#000000" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
+        <path class="sammy-mantle" d="M39 15 C47 15 55 18 59 25 C59 29 54 31 48 31 C41 31 38 26 38 20 C38 18 38 16 39 15 Z" fill="#c2a318" stroke="#000000" stroke-width="2" stroke-linejoin="round"></path>
+        <circle class="sammy-hole" cx="49" cy="21" r="1.6" fill="#000000"></circle>
+        <g class="sammy-eyestalks">
+          <path d="M53 15 C55 9 57 5 57 2" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round"></path>
+          <circle cx="57" cy="2" r="2.1" fill="#000000"></circle>
+          <path d="M47 15 C48 8 49 4 49 1" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round"></path>
+          <circle cx="49" cy="1" r="2.1" fill="#000000"></circle>
+        </g>
+      </svg>
+    </span>
+    <span class="sammy-bubble" id="sammy-bubble" role="status" aria-live="polite" hidden></span>
+  </button>
+</div>
+
 <script src="app.js"></script>
 </body>
 </html>

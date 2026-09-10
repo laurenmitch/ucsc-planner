@@ -15,10 +15,15 @@
     "Let's make your quarter less bananas 🍌"
   ];
 
+  var SAMMY_LINES_LOW = ['hey man','sup','oh hey','nice plan','go slugs',"just crawlin'",'you good?',"i'm goin' as fast as i can"];
+  var SAMMY_LINES_MID = ['stop poking me','dude.','ow','personal space, bro',"i'm workin' here",'do you mind?','again? really?'];
+  var SAMMY_LINES_HIGH = ["that's it. i'm leaving.","ok i'm ignoring you now",'talk to the mantle','...','i have a 10am, leave me alone'];
+
   var data = null;
   var appState = null;
   var ui = { drawerOpen:false, drawerSubject:'', drawerSearch:'', chooser:null, dragClassNbr:null };
   var loadingRotation = { order: [], index: 0, timer: null };
+  var sammyState = { pokeCount: 0, lastLine: null, bubbleTimer: null, flinchTimer: null, decayTimer: null };
 
   function el(id){ return document.getElementById(id); }
 
@@ -26,6 +31,7 @@
 
   function init(){
     wireStaticEvents();
+    initSammy();
     loadData();
   }
 
@@ -145,6 +151,42 @@
 
       if(t.classList && t.classList.contains('popover-backdrop')){ closeChooser(); return; }
     });
+  }
+
+  /* ---------------- Sammy the slug ---------------- */
+
+  function initSammy(){
+    var btn = el('sammy');
+    if(!btn) return;
+    btn.addEventListener('click', function(){ pokeSammy(); });
+    sammyState.decayTimer = setInterval(function(){
+      sammyState.pokeCount = Math.max(0, sammyState.pokeCount - 1);
+    }, 15000);
+  }
+
+  function pokeSammy(){
+    sammyState.pokeCount += 1;
+    var tier = sammyState.pokeCount <= 3 ? SAMMY_LINES_LOW : (sammyState.pokeCount <= 7 ? SAMMY_LINES_MID : SAMMY_LINES_HIGH);
+    var choices = tier.filter(function(l){ return l !== sammyState.lastLine; });
+    if(choices.length === 0) choices = tier;
+    var line = choices[Math.floor(Math.random() * choices.length)];
+    sammyState.lastLine = line;
+
+    var btn = el('sammy');
+    var bubble = el('sammy-bubble');
+    if(bubble){
+      bubble.textContent = line;
+      bubble.hidden = false;
+      if(sammyState.bubbleTimer) clearTimeout(sammyState.bubbleTimer);
+      sammyState.bubbleTimer = setTimeout(function(){ bubble.hidden = true; }, 2000);
+    }
+    if(btn){
+      btn.classList.remove('sammy-poked');
+      void btn.offsetWidth;
+      btn.classList.add('sammy-poked');
+      if(sammyState.flinchTimer) clearTimeout(sammyState.flinchTimer);
+      sammyState.flinchTimer = setTimeout(function(){ btn.classList.remove('sammy-poked'); }, 400);
+    }
   }
 
   function loadData(){
