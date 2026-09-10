@@ -72,12 +72,29 @@ button, select, input{
   background: var(--oat);
 }
 
-.loading-text, .error-text{
+.error-text{
   font-family: var(--display);
   text-transform: uppercase;
   letter-spacing: 0.06em;
   font-size: clamp(18px, 4vw, 28px);
   max-width: 42ch;
+}
+
+.loading-text{
+  font-family: var(--display);
+  letter-spacing: 0.01em;
+  font-size: clamp(18px, 4vw, 28px);
+  max-width: 42ch;
+  min-height: 2.6em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: opacity 0.18s ease;
+}
+
+.loading-text-fade{
+  opacity: 0;
 }
 
 /* ---------- buttons / inputs ---------- */
@@ -787,6 +804,7 @@ button, select, input{
 
 @media (prefers-reduced-motion: reduce){
   .drawer, .drawer-dim{ transition: none; }
+  .loading-text{ transition: none; }
 }
 
 /* Knowi platform accessibility invariant */

@@ -7,9 +7,18 @@
   var PX_PER_HOUR = 32;
   var DAYS = ['sun','mon','tue','wed','thu','fri','sat'];
 
+  var LOADING_LINES = [
+    'Manifesting the perfect schedule for you this quarter ✨',
+    'Making Plan A. And Plan B. And maybe Plan C.',
+    'Checking if an 8 AM is really necessary...',
+    'Performing schedule Tetris...',
+    "Let's make your quarter less bananas 🍌"
+  ];
+
   var data = null;
   var appState = null;
   var ui = { drawerOpen:false, drawerSubject:'', drawerSearch:'', chooser:null, dragClassNbr:null };
+  var loadingRotation = { order: [], index: 0, timer: null };
 
   function el(id){ return document.getElementById(id); }
 
@@ -160,18 +169,51 @@
       });
   }
 
+  function shuffle(arr){
+    var a = arr.slice();
+    for(var i = a.length - 1; i > 0; i--){
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+    }
+    return a;
+  }
+
+  function startLoadingRotation(){
+    stopLoadingRotation();
+    loadingRotation.order = shuffle(LOADING_LINES);
+    loadingRotation.index = 0;
+    var textEl = el('loading-text');
+    textEl.textContent = loadingRotation.order[0];
+    textEl.classList.remove('loading-text-fade');
+    loadingRotation.timer = setInterval(function(){
+      loadingRotation.index = (loadingRotation.index + 1) % loadingRotation.order.length;
+      textEl.classList.add('loading-text-fade');
+      setTimeout(function(){
+        textEl.textContent = loadingRotation.order[loadingRotation.index];
+        textEl.classList.remove('loading-text-fade');
+      }, 180);
+    }, 2200);
+  }
+
+  function stopLoadingRotation(){
+    if(loadingRotation.timer){ clearInterval(loadingRotation.timer); loadingRotation.timer = null; }
+  }
+
   function showLoading(){
     el('loading-screen').hidden = false;
     el('error-screen').hidden = true;
     el('app').hidden = true;
+    startLoadingRotation();
   }
   function showError(msg){
+    stopLoadingRotation();
     el('loading-screen').hidden = true;
     el('error-screen').hidden = false;
     el('app').hidden = true;
     el('error-message').textContent = msg;
   }
   function showApp(){
+    stopLoadingRotation();
     el('loading-screen').hidden = true;
     el('error-screen').hidden = true;
     el('app').hidden = false;
