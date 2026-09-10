@@ -30,12 +30,31 @@ async function invoke(req, capability, input){
   return resp.json();
 }
 
+function fieldName(entry){
+  if(entry && typeof entry === 'object') return entry.name;
+  return entry;
+}
+
+function rowToObject(row, fieldNames){
+  if(!Array.isArray(row)) return row;
+  const obj = {};
+  fieldNames.forEach((name, i) => {
+    if(name) obj[name] = row[i];
+  });
+  return obj;
+}
+
 async function queryAll(req, binding, fields, pageLimit){
   let rows = [];
   let offset = 0;
   for(;;){
     const result = await invoke(req, 'data.query', { binding, limit: pageLimit, offset, fields });
-    rows = rows.concat(result.rows || []);
+    const columnSource = result.fields || result.columns;
+    const fieldNames = Array.isArray(columnSource) && columnSource.length
+      ? columnSource.map(fieldName)
+      : fields;
+    const resultRows = (result.rows || []).map(row => rowToObject(row, fieldNames));
+    rows = rows.concat(resultRows);
     if(result.truncated && typeof result.nextOffset === 'number'){
       offset = result.nextOffset;
     } else {

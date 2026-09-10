@@ -147,6 +147,9 @@
       })
       .then(function(json){
         buildIndexes(json);
+        if(data.terms.length === 0){
+          throw new Error('No quarters are available right now.');
+        }
         appState = loadPersisted();
         renderGutter();
         showApp();
