@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Slug Planner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="app.css">
 </head>
 <body>
@@ -31,7 +34,9 @@
     <main class="plan-area" id="plan-area-outer">
       <button type="button" id="plan-prev" class="plan-nav plan-nav-prev" aria-label="Previous plan">‹</button>
 
-      <div class="plan-content">
+      <div class="plan-track" id="plan-track">
+      <div class="plan-ghost plan-ghost-prev" id="plan-ghost-prev" aria-hidden="true" hidden></div>
+      <div class="plan-content" id="plan-content">
         <div class="plan-head">
           <h1 class="plan-name" id="plan-name" contenteditable="true" role="textbox" aria-label="Plan name" spellcheck="false"></h1>
           <p class="plan-summary" id="plan-summary">EMPTY</p>
@@ -73,6 +78,8 @@
             <button type="button" id="plan-delete" class="btn">CLEAR PLAN</button>
           </div>
         </div>
+      </div>
+      <div class="plan-ghost plan-ghost-next" id="plan-ghost-next" aria-hidden="true" hidden></div>
       </div>
 
       <button type="button" id="plan-next" class="plan-nav plan-nav-next" aria-label="Next plan">›</button>

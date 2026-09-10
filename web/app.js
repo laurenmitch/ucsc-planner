@@ -21,7 +21,7 @@
 
   var data = null;
   var appState = null;
-  var ui = { drawerOpen:false, drawerSubject:'', drawerSearch:'', chooser:null, dragClassNbr:null, reorderOpen:false, reorderDragId:null, reorderCurrentId:null };
+  var ui = { drawerOpen:false, drawerSubject:'', drawerSearch:'', chooser:null, dragClassNbr:null, reorderOpen:false, reorderDragId:null, reorderCurrentId:null, sliding:false };
   var loadingRotation = { order: [], index: 0, timer: null };
   var sammyState = { pokeCount: 0, lastLine: null, bubbleTimer: null, flinchTimer: null, decayTimer: null };
 
@@ -110,6 +110,7 @@
         try{ e.dataTransfer.setData('text/plain', String(classNbr)); }catch(err){}
         e.dataTransfer.effectAllowed = 'copy';
         el('calendar').classList.add('armed');
+        document.body.classList.add('dragging');
         return;
       }
       var row = e.target.closest && e.target.closest('.reorder-row');
@@ -122,12 +123,32 @@
     });
     document.addEventListener('dragend', function(){
       el('calendar').classList.remove('armed');
+      document.body.classList.remove('dragging');
       ui.dragClassNbr = null;
       if(ui.reorderDragId){
         ui.reorderDragId = null;
         save();
         renderPlanArea();
       }
+    });
+
+    ['plan-ghost-prev','plan-ghost-next'].forEach(function(id){
+      var ghost = el(id);
+      ghost.addEventListener('dragover', function(e){ e.preventDefault(); });
+      ghost.addEventListener('drop', function(e){
+        e.preventDefault();
+        var classNbr = ui.dragClassNbr;
+        el('calendar').classList.remove('armed');
+        document.body.classList.remove('dragging');
+        ui.dragClassNbr = null;
+        var idx = Number(ghost.dataset.planIndex);
+        if(classNbr == null || isNaN(idx) || !appState.plans[idx]) return;
+        appState.currentPlanIndex = idx;
+        save();
+        renderPlanArea();
+        renderClassBank();
+        addLectureToCurrentPlan(classNbr);
+      });
     });
 
     var calendar = el('calendar');
@@ -480,10 +501,27 @@
 
   function navigatePlan(delta){
     var n = appState.plans.length;
-    appState.currentPlanIndex = (appState.currentPlanIndex + delta + n) % n;
-    save();
-    renderPlanArea();
-    renderClassBank();
+    if(n < 2 || ui.sliding) return;
+    var target = (appState.currentPlanIndex + delta + n) % n;
+    var track = el('plan-track');
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var ghostVisible = el('plan-ghost-next').offsetParent !== null;
+    function commit(){
+      appState.currentPlanIndex = target;
+      save();
+      track.classList.add('no-anim');
+      track.classList.remove('slide-next', 'slide-prev');
+      renderPlanArea();
+      renderClassBank();
+      void track.offsetWidth;
+      track.classList.remove('no-anim');
+      ui.sliding = false;
+    }
+    if(reduce || !ghostVisible){ commit(); return; }
+    ui.sliding = true;
+    closeChooser();
+    track.classList.add(delta > 0 ? 'slide-next' : 'slide-prev');
+    setTimeout(commit, 320);
   }
 
   function addPlan(){
@@ -568,14 +606,10 @@
       var lec = data.classesByNbr.get(Number(k));
       if(lec && typeof lec.units === 'number') units += lec.units;
     });
-    var summaryEl = el('plan-summary');
-    if(count === 0){
-      summaryEl.textContent = 'EMPTY';
-    } else {
-      summaryEl.textContent = count + ' CLASS' + (count !== 1 ? 'ES' : '') + ' · ' + roundUnits(units) + ' UNIT' + (units !== 1 ? 'S' : '');
-    }
+    el('plan-summary').textContent = planSummaryText(plan);
 
     renderCalendar(plan);
+    renderGhosts();
 
     el('plan-counter').textContent = (appState.currentPlanIndex + 1) + ' / ' + appState.plans.length;
     el('plan-add').textContent = '+ MAKE A PLAN ' + nextLetter();
@@ -586,6 +620,45 @@
     if(ui.reorderOpen){ renderReorderList(); }
   }
 
+  function planSummaryText(plan){
+    var keys = Object.keys(plan.picks);
+    var count = keys.length;
+    var units = 0;
+    keys.forEach(function(k){
+      var lec = data.classesByNbr.get(Number(k));
+      if(lec && typeof lec.units === 'number') units += lec.units;
+    });
+    if(count === 0) return 'EMPTY';
+    return count + ' CLASS' + (count !== 1 ? 'ES' : '') + ' · ' + roundUnits(units) + ' UNIT' + (units !== 1 ? 'S' : '');
+  }
+
+  /* ---------------- plan carousel ghosts ---------------- */
+
+  function renderGhosts(){
+    var n = appState.plans.length;
+    var prev = el('plan-ghost-prev'), next = el('plan-ghost-next');
+    if(n < 2){ prev.hidden = true; next.hidden = true; prev.innerHTML = ''; next.innerHTML = ''; return; }
+    var i = appState.currentPlanIndex;
+    fillGhost(prev, (i - 1 + n) % n);
+    fillGhost(next, (i + 1) % n);
+  }
+
+  function fillGhost(ghost, idx){
+    var plan = appState.plans[idx];
+    ghost.hidden = false;
+    ghost.dataset.planIndex = idx;
+    ghost.innerHTML =
+      '<div class="plan-head"><h1 class="plan-name">' + escapeHtml(plan.name) + '</h1>' +
+      '<p class="plan-summary">' + escapeHtml(planSummaryText(plan)) + '</p></div>' +
+      '<div class="calendar"><div class="calendar-frame">' +
+      '<div class="calendar-header"><div class="calendar-gutter-header"></div>' +
+      ['SUN','MON','TUE','WED','THU','FRI','SAT'].map(function(d){ return '<div class="calendar-day-header">' + d + '</div>'; }).join('') +
+      '</div><div class="calendar-body"><div class="calendar-gutter"></div><div class="calendar-grid"></div></div></div></div>' +
+      '<div class="plan-bar"><div class="plan-counter">&nbsp;</div><div class="plan-actions"><button type="button" class="btn btn-primary" tabindex="-1">+ MAKE A PLAN</button></div></div>';
+    fillGutter(ghost.querySelector('.calendar-gutter'));
+    fillCalendarGrid(ghost.querySelector('.calendar-grid'), plan);
+  }
+
   function roundUnits(n){
     var r = Math.round(n * 10) / 10;
     return r;
@@ -593,8 +666,9 @@
 
   /* ---------------- calendar ---------------- */
 
-  function renderGutter(){
-    var gutter = el('calendar-gutter');
+  function renderGutter(){ fillGutter(el('calendar-gutter')); }
+
+  function fillGutter(gutter){
     gutter.innerHTML = '';
     for(var h = HOUR_START; h <= HOUR_END; h++){
       var label = document.createElement('div');
@@ -747,8 +821,9 @@
     return Math.max(0, Math.min(v, max));
   }
 
-  function renderCalendar(plan){
-    var grid = el('calendar-grid');
+  function renderCalendar(plan){ fillCalendarGrid(el('calendar-grid'), plan); }
+
+  function fillCalendarGrid(grid, plan){
     grid.innerHTML = '';
     var blocks = buildPlanBlocks(plan);
     markConflicts(blocks);

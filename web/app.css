@@ -9,8 +9,9 @@
   --border: #11170d;
   --red: #c81e1e;
 
-  --display: "Arial Black", "Archivo Black", "Helvetica Neue", Arial, sans-serif;
-  --body: "Helvetica Neue", Helvetica, Arial, "Archivo", sans-serif;
+  --display: "Archivo Black", "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  --body: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --peek: 40px;
 
   --hour-px: 32px;
   --cal-hours: 15;
@@ -309,7 +310,7 @@ button, select, input{
   position: relative;
 }
 
-#calendar-grid{
+#calendar-grid, .calendar-grid{
   display: contents;
 }
 
@@ -1003,3 +1004,89 @@ button, select, input{
 
 /* Knowi platform accessibility invariant */
 [hidden] { display: none !important; }
+
+/* ---------- plan carousel ---------- */
+
+.plan-track{
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+}
+.plan-track > .plan-content{
+  flex: 1;
+  min-width: 0;
+  transform: translateX(0) scale(1);
+  opacity: 1;
+  filter: grayscale(0);
+  transform-origin: center center;
+  transition: transform .3s ease, opacity .3s ease, filter .3s ease;
+}
+.plan-ghost{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  pointer-events: none;
+  opacity: .45;
+  transition: transform .3s ease, opacity .3s ease, filter .3s ease;
+}
+.plan-ghost[hidden]{ display: none; }
+.plan-ghost-prev{
+  transform: translateX(calc(-100% + var(--peek))) scale(.94);
+  transform-origin: right center;
+  filter: grayscale(.25);
+}
+.plan-ghost-next{
+  transform: translateX(calc(100% - var(--peek))) scale(.94);
+  transform-origin: left center;
+  filter: grayscale(.65);
+}
+.plan-ghost .plan-name{ cursor: default; }
+.plan-ghost .plan-bar{ visibility: hidden; }
+
+.plan-track.slide-next > .plan-content{
+  transform: translateX(calc(-100% + var(--peek))) scale(.94);
+  transform-origin: right center;
+  opacity: .45;
+  filter: grayscale(.25);
+}
+.plan-track.slide-next .plan-ghost-next{
+  transform: translateX(0) scale(1);
+  opacity: 1;
+  filter: none;
+}
+.plan-track.slide-prev > .plan-content{
+  transform: translateX(calc(100% - var(--peek))) scale(.94);
+  transform-origin: left center;
+  opacity: .45;
+  filter: grayscale(.65);
+}
+.plan-track.slide-prev .plan-ghost-prev{
+  transform: translateX(0) scale(1);
+  opacity: 1;
+  filter: none;
+}
+.plan-track.no-anim, .plan-track.no-anim > *{ transition: none !important; }
+
+body.dragging .plan-ghost{ pointer-events: auto; }
+body.dragging .plan-ghost .calendar-col{
+  background: #e2ddc4;
+  outline: 2px dashed var(--muted);
+  outline-offset: -2px;
+}
+body.dragging .plan-ghost:hover{ opacity: .85; filter: none; }
+
+@media (max-width: 900px){
+  .plan-ghost{ display: none; }
+}
+@media (prefers-reduced-motion: reduce){
+  .plan-track > .plan-content, .plan-ghost{ transition: none; }
+}
