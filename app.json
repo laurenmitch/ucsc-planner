@@ -1,0 +1,1 @@
+{"v":2,"service":"server/app.mjs","bindings":[{"key":"terms","type":"data","id":183239},{"key":"classes","type":"data","id":183240},{"key":"sections","type":"data","id":183241}],"branding":{"name":"Slug Planner","colors":{"background":"#ede9dc","surface":"#f4f1e6","text":"#11170d","muted":"#4a4a37","border":"#11170d","button":"#11170d","buttonText":"#cfd026"}}}

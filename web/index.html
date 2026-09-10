@@ -1,0 +1,102 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slug Planner — UC Santa Cruz</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<div id="loading-screen" class="full-screen-state" role="status" aria-live="polite">
+  <p class="loading-text">LOADING THE SCHEDULE OF CLASSES…</p>
+</div>
+
+<div id="error-screen" class="full-screen-state" hidden>
+  <p class="error-text" id="error-message">Something went wrong loading the schedule.</p>
+  <button type="button" id="retry-btn" class="btn btn-primary">RETRY</button>
+</div>
+
+<div id="app" hidden>
+  <header class="topbar">
+    <div class="topbar-side topbar-left">SLUG PLANNER</div>
+    <div class="topbar-center">
+      <label class="sr-only" for="term-select">Quarter</label>
+      <select id="term-select" class="select"></select>
+      <button type="button" id="add-class-btn" class="btn btn-primary">ADD CLASS →</button>
+    </div>
+    <div class="topbar-side topbar-right">UC SANTA CRUZ</div>
+  </header>
+
+  <div class="layout">
+    <main class="plan-area" id="plan-area-outer">
+      <button type="button" id="plan-prev" class="plan-nav plan-nav-prev" aria-label="Previous plan">‹</button>
+
+      <div class="plan-content">
+        <div class="plan-head">
+          <h1 class="plan-name" id="plan-name" contenteditable="true" role="textbox" aria-label="Plan name" spellcheck="false"></h1>
+          <p class="plan-summary" id="plan-summary">EMPTY</p>
+        </div>
+
+        <div class="calendar" id="calendar">
+          <div class="calendar-frame">
+            <div class="calendar-header">
+              <div class="calendar-gutter-header"></div>
+              <div class="calendar-day-header">SUN</div>
+              <div class="calendar-day-header">MON</div>
+              <div class="calendar-day-header">TUE</div>
+              <div class="calendar-day-header">WED</div>
+              <div class="calendar-day-header">THU</div>
+              <div class="calendar-day-header">FRI</div>
+              <div class="calendar-day-header">SAT</div>
+            </div>
+            <div class="calendar-body" id="calendar-body">
+              <div class="calendar-gutter" id="calendar-gutter"></div>
+              <div id="calendar-grid"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="plan-bar">
+          <div class="plan-counter" id="plan-counter">1 / 1</div>
+          <div class="plan-actions">
+            <button type="button" id="plan-add" class="btn btn-primary">+ MAKE A PLAN B</button>
+            <button type="button" id="plan-duplicate" class="btn">DUPLICATE</button>
+            <button type="button" id="plan-delete" class="btn">CLEAR PLAN</button>
+          </div>
+        </div>
+      </div>
+
+      <button type="button" id="plan-next" class="plan-nav plan-nav-next" aria-label="Next plan">›</button>
+    </main>
+
+    <aside class="class-bank" id="class-bank" aria-label="Class bank">
+      <div class="bank-header">
+        <h2>CLASS BANK</h2>
+        <p class="bank-hint">DRAG A SECTION ONTO A PLAN →</p>
+      </div>
+      <div class="bank-list" id="bank-list"></div>
+    </aside>
+  </div>
+</div>
+
+<div id="drawer-dim" class="drawer-dim" hidden></div>
+<div id="drawer" class="drawer" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="drawer-heading">
+  <div class="drawer-header">
+    <h2 id="drawer-heading">ADD A CLASS</h2>
+    <button type="button" id="drawer-close" class="icon-btn" aria-label="Close">✕</button>
+  </div>
+  <div class="drawer-controls">
+    <label class="sr-only" for="subject-select">Subject</label>
+    <select id="subject-select" class="select"></select>
+    <label class="sr-only" for="search-input">Search courses</label>
+    <input type="search" id="search-input" class="input" placeholder="SEARCH COURSE OR TITLE">
+  </div>
+  <div class="drawer-list" id="drawer-list"></div>
+</div>
+
+<div id="popover-layer" hidden></div>
+
+<script src="app.js"></script>
+</body>
+</html>
