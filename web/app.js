@@ -36,6 +36,12 @@
     loadData();
   }
 
+  function endCardDrag(){
+    el('calendar').classList.remove('armed');
+    document.body.classList.remove('dragging');
+    ui.dragClassNbr = null;
+  }
+
   /* ---------------- first-time guide ---------------- */
 
   var GUIDE_KEY = 'slugPlanner.guideDismissed';
@@ -139,9 +145,7 @@
       }
     });
     document.addEventListener('dragend', function(){
-      el('calendar').classList.remove('armed');
-      document.body.classList.remove('dragging');
-      ui.dragClassNbr = null;
+      endCardDrag();
       if(ui.reorderDragId){
         ui.reorderDragId = null;
         save();
@@ -155,9 +159,7 @@
       ghost.addEventListener('drop', function(e){
         e.preventDefault();
         var classNbr = ui.dragClassNbr;
-        el('calendar').classList.remove('armed');
-        document.body.classList.remove('dragging');
-        ui.dragClassNbr = null;
+        endCardDrag();
         var idx = Number(ghost.dataset.planIndex);
         if(classNbr == null || isNaN(idx) || !appState.plans[idx]) return;
         appState.currentPlanIndex = idx;
@@ -173,11 +175,13 @@
     calendar.addEventListener('drop', function(e){
       e.preventDefault();
       var classNbr = ui.dragClassNbr;
-      el('calendar').classList.remove('armed');
-      ui.dragClassNbr = null;
+      endCardDrag();
       if(classNbr == null) return;
       addLectureToCurrentPlan(classNbr);
     });
+    // The dragged card is re-rendered (destroyed) on drop, so its dragend never fires; clear the drag state on any drop or pointer release.
+    document.addEventListener('drop', function(){ if(ui.dragClassNbr != null) endCardDrag(); });
+    document.addEventListener('pointerup', function(){ if(document.body.classList.contains('dragging')) endCardDrag(); });
 
     document.addEventListener('dblclick', function(e){
       var card = e.target.closest && e.target.closest('.lecture-card[draggable="true"]');
