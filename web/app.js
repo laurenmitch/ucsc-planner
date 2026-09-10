@@ -43,19 +43,19 @@
       tbaNote.el = document.createElement('div');
       tbaNote.el.className = 'tba-note';
       tbaNote.el.setAttribute('role', 'status');
-      tbaNote.el.innerHTML = '<span class="tba-note-title">TIME TBA!</span> No meeting time posted yet, so it can\'t go on a plan.';
+      tbaNote.el.innerHTML = '<span class="tba-note-title">TIME TBA!</span>';
       document.body.appendChild(tbaNote.el);
     }
     var r = card.getBoundingClientRect();
     var note = tbaNote.el;
     note.hidden = false;
     note.style.left = Math.max(8, Math.min(r.left, window.innerWidth - 260)) + 'px';
-    note.style.top = Math.max(8, r.top - 58) + 'px';
+    note.style.top = Math.max(8, r.top - 40) + 'px';
     card.classList.remove('lecture-card-shake');
     void card.offsetWidth;
     card.classList.add('lecture-card-shake');
     clearTimeout(tbaNote.timer);
-    tbaNote.timer = setTimeout(function(){ note.hidden = true; card.classList.remove('lecture-card-shake'); }, 2200);
+    tbaNote.timer = setTimeout(function(){ note.hidden = true; card.classList.remove('lecture-card-shake'); }, 1500);
   }
 
   function endCardDrag(){

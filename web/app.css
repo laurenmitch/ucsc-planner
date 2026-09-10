@@ -1196,6 +1196,5 @@ body.dragging .plan-ghost:hover{ opacity: .85 !important; filter: none; }
   font-family: var(--display);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  margin-right: 4px;
 }
 @media (prefers-reduced-motion: reduce){ .lecture-card-shake{ animation: none; } }
