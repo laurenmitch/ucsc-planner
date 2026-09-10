@@ -1116,6 +1116,12 @@
     layer.appendChild(pop);
     layer.hidden = false;
 
+    // Keep the whole popover inside the viewport so its own scrollbar can reach every section.
+    var margin = 8;
+    var maxTop = window.innerHeight - margin - pop.offsetHeight;
+    if(top > maxTop) top = Math.max(margin, maxTop);
+    pop.style.top = top + 'px';
+
     var firstBtn = pop.querySelector('button');
     if(firstBtn) firstBtn.focus();
   }

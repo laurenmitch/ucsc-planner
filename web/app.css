@@ -833,8 +833,9 @@ button, select, input{
   position: fixed;
   width: 300px;
   max-width: 92vw;
-  max-height: 70vh;
+  max-height: calc(100vh - 16px);
   overflow-y: auto;
+  overscroll-behavior: contain;
   background: var(--oat);
   border: 2px solid var(--ink);
   box-shadow: 4px 4px 0 var(--ink);
