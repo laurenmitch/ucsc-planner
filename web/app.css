@@ -1164,3 +1164,37 @@ body.dragging .plan-ghost:hover{ opacity: .85 !important; filter: none; }
   padding: 2px 4px;
 }
 .guide-close:hover{ background: var(--ink); color: var(--lime); }
+
+/* ---------- Time TBA note ---------- */
+
+.lecture-card-static{ cursor: not-allowed; }
+.lecture-card-shake{ animation: card-shake .35s ease; }
+@keyframes card-shake{
+  0%{ transform: translateX(0); }
+  25%{ transform: translateX(-3px); }
+  50%{ transform: translateX(3px); }
+  75%{ transform: translateX(-2px); }
+  100%{ transform: translateX(0); }
+}
+.tba-note{
+  position: fixed;
+  z-index: 60;
+  max-width: 250px;
+  padding: 7px 10px;
+  border: 2px solid var(--ink);
+  background: var(--oat);
+  color: var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+  font-family: var(--body);
+  font-size: 12px;
+  line-height: 1.3;
+  pointer-events: none;
+}
+.tba-note[hidden]{ display: none; }
+.tba-note-title{
+  font-family: var(--display);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-right: 4px;
+}
+@media (prefers-reduced-motion: reduce){ .lecture-card-shake{ animation: none; } }

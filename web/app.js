@@ -36,6 +36,28 @@
     loadData();
   }
 
+  var tbaNote = { el: null, timer: null };
+
+  function showTbaNote(card){
+    if(!tbaNote.el){
+      tbaNote.el = document.createElement('div');
+      tbaNote.el.className = 'tba-note';
+      tbaNote.el.setAttribute('role', 'status');
+      tbaNote.el.innerHTML = '<span class="tba-note-title">TIME TBA!</span> No meeting time posted yet, so it can\'t go on a plan.';
+      document.body.appendChild(tbaNote.el);
+    }
+    var r = card.getBoundingClientRect();
+    var note = tbaNote.el;
+    note.hidden = false;
+    note.style.left = Math.max(8, Math.min(r.left, window.innerWidth - 260)) + 'px';
+    note.style.top = Math.max(8, r.top - 58) + 'px';
+    card.classList.remove('lecture-card-shake');
+    void card.offsetWidth;
+    card.classList.add('lecture-card-shake');
+    clearTimeout(tbaNote.timer);
+    tbaNote.timer = setTimeout(function(){ note.hidden = true; card.classList.remove('lecture-card-shake'); }, 2200);
+  }
+
   function endCardDrag(){
     el('calendar').classList.remove('armed');
     document.body.classList.remove('dragging');
@@ -186,6 +208,14 @@
     document.addEventListener('dblclick', function(e){
       var card = e.target.closest && e.target.closest('.lecture-card[draggable="true"]');
       if(card){ addLectureToCurrentPlan(Number(card.dataset.classNbr)); }
+    });
+
+    // Time TBA cards cannot be dragged; explain why when someone tries.
+    ['mousedown', 'click', 'dblclick'].forEach(function(evt){
+      document.addEventListener(evt, function(e){
+        var tba = e.target.closest && e.target.closest('.lecture-card-static');
+        if(tba && !(e.target.closest && e.target.closest('.bank-remove'))) showTbaNote(tba);
+      });
     });
 
     document.addEventListener('click', function(e){
