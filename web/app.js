@@ -914,7 +914,7 @@
     var bottom = clampPx((b.end - HOUR_START*60) / 60 * PX_PER_HOUR);
     div.style.top = top + 'px';
     div.style.height = Math.max(18, bottom - top) + 'px';
-    div.style.background = b.color;
+    div.style.backgroundColor = b.color;
     div.title = b.course + ' · ' + (b.sectionLabel || '') + ' · ' + formatTimeRange(b.start, b.end) + (b.room ? ' · ' + b.room : '');
     var textColor = luminance(b.color) > 0.55 ? '#11170d' : '#f4f1e6';
     div.style.color = textColor;
@@ -930,8 +930,7 @@
 
     div.innerHTML =
       '<button type="button" class="block-remove" data-remove="' + b.classNbr + '" aria-label="Remove ' + escapeAttr(b.course) + ' from plan">✕</button>' +
-      (b.conflict ? '<span class="block-conflict-tag">⚠ Conflict</span><br>' : '') +
-      '<div class="block-course">' + escapeHtml(b.course) + '</div>' +
+      '<div class="block-course">' + (b.conflict ? '<span class="block-conflict-tag">⚠ Conflict</span> ' : '') + escapeHtml(b.course) + '</div>' +
       '<div class="block-section">' + escapeHtml(b.sectionLabel || '') + '</div>' +
       '<div class="block-time">' + formatTimeRange(b.start, b.end) + (b.room ? ' · ' + escapeHtml(b.room) : '') + '</div>' +
       chipHtml;

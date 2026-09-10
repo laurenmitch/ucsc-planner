@@ -389,8 +389,9 @@ button, select, input{
 }
 .block-conflict-tag{
   display: inline-block;
-  margin: 2px 0 3px;
-  padding: 1px 5px;
+  vertical-align: 1px;
+  margin: 0 2px 0 0;
+  padding: 0 4px;
   background: var(--red);
   color: #fff;
   font-family: var(--display);
@@ -1213,3 +1214,13 @@ body.dragging .plan-ghost:hover{ opacity: .85 !important; filter: none; }
   letter-spacing: 0.05em;
 }
 @media (prefers-reduced-motion: reduce){ .lecture-card-shake{ animation: none; } }
+
+/* ---------- subject picker stands out in the drawer ---------- */
+
+#subject-select{
+  background: var(--lime);
+  color: var(--ink);
+  font-family: var(--display);
+  letter-spacing: 0.04em;
+}
+#subject-select:hover, #subject-select:focus{ background: #dfe04a; }
