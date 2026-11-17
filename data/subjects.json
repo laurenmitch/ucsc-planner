@@ -1,397 +1,397 @@
 [
 {
 "subject": "AM",
-"subject_name": "Applied Mathematics",
+"subject_name": "Applied Mathematics (AM)",
 "term_code": 2270
 },
 {
 "subject": "ANTH",
-"subject_name": "Anthropology",
+"subject_name": "Anthropology (ANTH)",
 "term_code": 2270
 },
 {
 "subject": "APLX",
-"subject_name": "Applied Linguistics",
+"subject_name": "Applied Linguistics (APLX)",
 "term_code": 2270
 },
 {
 "subject": "ARBC",
-"subject_name": "Arabic",
+"subject_name": "Arabic (ARBC)",
 "term_code": 2270
 },
 {
 "subject": "ART",
-"subject_name": "Art",
+"subject_name": "Art (ART)",
 "term_code": 2270
 },
 {
 "subject": "ARTG",
-"subject_name": "Art&Des:Games&PlayableMedia",
+"subject_name": "Art&Des:Games&PlayableMedia (ARTG)",
 "term_code": 2270
 },
 {
 "subject": "ASTR",
-"subject_name": "Astronomy and Astrophysics",
+"subject_name": "Astronomy and Astrophysics (ASTR)",
 "term_code": 2270
 },
 {
 "subject": "BIOC",
-"subject_name": "Biochemistry and Molecular Bio",
+"subject_name": "Biochemistry and Molecular Bio (BIOC)",
 "term_code": 2270
 },
 {
 "subject": "BIOE",
-"subject_name": "Biology:Ecology & Evolutionary",
+"subject_name": "Biology:Ecology & Evolutionary (BIOE)",
 "term_code": 2270
 },
 {
 "subject": "BIOL",
-"subject_name": "Biology: Molecular Cell & Dev",
+"subject_name": "Biology: Molecular Cell & Dev (BIOL)",
 "term_code": 2270
 },
 {
 "subject": "BME",
-"subject_name": "Biomolecular Engineering",
+"subject_name": "Biomolecular Engineering (BME)",
 "term_code": 2270
 },
 {
 "subject": "CHEM",
-"subject_name": "Chemistry and Biochemistry",
+"subject_name": "Chemistry and Biochemistry (CHEM)",
 "term_code": 2270
 },
 {
 "subject": "CHIN",
-"subject_name": "Chinese",
+"subject_name": "Chinese (CHIN)",
 "term_code": 2270
 },
 {
 "subject": "CLNI",
-"subject_name": "College Nine",
+"subject_name": "College Nine (CLNI)",
 "term_code": 2270
 },
 {
 "subject": "CMMU",
-"subject_name": "Community Studies",
+"subject_name": "Community Studies (CMMU)",
 "term_code": 2270
 },
 {
 "subject": "CMPM",
-"subject_name": "Computational Media",
+"subject_name": "Computational Media (CMPM)",
 "term_code": 2270
 },
 {
 "subject": "COWL",
-"subject_name": "Cowell College",
+"subject_name": "Cowell College (COWL)",
 "term_code": 2270
 },
 {
 "subject": "CRES",
-"subject_name": "Critical Race & Ethnic Studies",
+"subject_name": "Critical Race & Ethnic Studies (CRES)",
 "term_code": 2270
 },
 {
 "subject": "CRSN",
-"subject_name": "Carson College",
+"subject_name": "Carson College (CRSN)",
 "term_code": 2270
 },
 {
 "subject": "CRWN",
-"subject_name": "Crown College",
+"subject_name": "Crown College (CRWN)",
 "term_code": 2270
 },
 {
 "subject": "CSE",
-"subject_name": "Computer Science & Engineering",
+"subject_name": "Computer Science & Engineering (CSE)",
 "term_code": 2270
 },
 {
 "subject": "CSP",
-"subject_name": "Coastal Science and Policy",
+"subject_name": "Coastal Science and Policy (CSP)",
 "term_code": 2270
 },
 {
 "subject": "CT",
-"subject_name": "Creative Technologies",
+"subject_name": "Creative Technologies (CT)",
 "term_code": 2270
 },
 {
 "subject": "EART",
-"subject_name": "Earth Sciences",
+"subject_name": "Earth Sciences (EART)",
 "term_code": 2270
 },
 {
 "subject": "ECE",
-"subject_name": "Electrical & Computer Engineer",
+"subject_name": "Electrical & Computer Engineer (ECE)",
 "term_code": 2270
 },
 {
 "subject": "ECON",
-"subject_name": "Economics",
+"subject_name": "Economics (ECON)",
 "term_code": 2270
 },
 {
 "subject": "EDUC",
-"subject_name": "Education",
+"subject_name": "Education (EDUC)",
 "term_code": 2270
 },
 {
 "subject": "ENVS",
-"subject_name": "Environmental Studies",
+"subject_name": "Environmental Studies (ENVS)",
 "term_code": 2270
 },
 {
 "subject": "ESCI",
-"subject_name": "Environmental Sciences",
+"subject_name": "Environmental Sciences (ESCI)",
 "term_code": 2270
 },
 {
 "subject": "FILM",
-"subject_name": "Film and Digital Media",
+"subject_name": "Film and Digital Media (FILM)",
 "term_code": 2270
 },
 {
 "subject": "FMST",
-"subject_name": "Feminist Studies",
+"subject_name": "Feminist Studies (FMST)",
 "term_code": 2270
 },
 {
 "subject": "FREN",
-"subject_name": "French",
+"subject_name": "French (FREN)",
 "term_code": 2270
 },
 {
 "subject": "GCH",
-"subject_name": "Global and Community Health",
+"subject_name": "Global and Community Health (GCH)",
 "term_code": 2270
 },
 {
 "subject": "GIST",
-"subject_name": "Geographic Information Systems",
+"subject_name": "Geographic Information Systems (GIST)",
 "term_code": 2270
 },
 {
 "subject": "GRAD",
-"subject_name": "Graduate",
+"subject_name": "Graduate (GRAD)",
 "term_code": 2270
 },
 {
 "subject": "GREE",
-"subject_name": "Greek",
+"subject_name": "Greek (GREE)",
 "term_code": 2270
 },
 {
 "subject": "HAVC",
-"subject_name": "History of Art&Visual Culture",
+"subject_name": "History of Art&Visual Culture (HAVC)",
 "term_code": 2270
 },
 {
 "subject": "HCI",
-"subject_name": "Human Computer Interaction",
+"subject_name": "Human Computer Interaction (HCI)",
 "term_code": 2270
 },
 {
 "subject": "HEBR",
-"subject_name": "Hebrew",
+"subject_name": "Hebrew (HEBR)",
 "term_code": 2270
 },
 {
 "subject": "HIS",
-"subject_name": "History",
+"subject_name": "History (HIS)",
 "term_code": 2270
 },
 {
 "subject": "HISC",
-"subject_name": "History of Consciousness",
+"subject_name": "History of Consciousness (HISC)",
 "term_code": 2270
 },
 {
 "subject": "HTEC",
-"subject_name": "Humanizing Technology",
+"subject_name": "Humanizing Technology (HTEC)",
 "term_code": 2270
 },
 {
 "subject": "ITAL",
-"subject_name": "Italian",
+"subject_name": "Italian (ITAL)",
 "term_code": 2270
 },
 {
 "subject": "JAPN",
-"subject_name": "Japanese",
+"subject_name": "Japanese (JAPN)",
 "term_code": 2270
 },
 {
 "subject": "JRLC",
-"subject_name": "John R. Lewis College",
+"subject_name": "John R. Lewis College (JRLC)",
 "term_code": 2270
 },
 {
 "subject": "KRSG",
-"subject_name": "Kresge College",
+"subject_name": "Kresge College (KRSG)",
 "term_code": 2270
 },
 {
 "subject": "LALS",
-"subject_name": "Latin American&Latino Studies",
+"subject_name": "Latin American&Latino Studies (LALS)",
 "term_code": 2270
 },
 {
 "subject": "LATN",
-"subject_name": "Latin",
+"subject_name": "Latin (LATN)",
 "term_code": 2270
 },
 {
 "subject": "LGST",
-"subject_name": "Legal Studies",
+"subject_name": "Legal Studies (LGST)",
 "term_code": 2270
 },
 {
 "subject": "LING",
-"subject_name": "Linguistics",
+"subject_name": "Linguistics (LING)",
 "term_code": 2270
 },
 {
 "subject": "LIT",
-"subject_name": "Literature",
+"subject_name": "Literature (LIT)",
 "term_code": 2270
 },
 {
 "subject": "MATH",
-"subject_name": "Mathematics",
+"subject_name": "Mathematics (MATH)",
 "term_code": 2270
 },
 {
 "subject": "MERR",
-"subject_name": "Merrill College",
+"subject_name": "Merrill College (MERR)",
 "term_code": 2270
 },
 {
 "subject": "METX",
-"subject_name": "Microbiol & Environ Toxicology",
+"subject_name": "Microbiol & Environ Toxicology (METX)",
 "term_code": 2270
 },
 {
 "subject": "MSE",
-"subject_name": "Materials Sci & Eng",
+"subject_name": "Materials Sci & Eng (MSE)",
 "term_code": 2270
 },
 {
 "subject": "MUSC",
-"subject_name": "Music",
+"subject_name": "Music (MUSC)",
 "term_code": 2270
 },
 {
 "subject": "NLP",
-"subject_name": "Natural Language Processing",
+"subject_name": "Natural Language Processing (NLP)",
 "term_code": 2270
 },
 {
 "subject": "OAKS",
-"subject_name": "Oakes College",
+"subject_name": "Oakes College (OAKS)",
 "term_code": 2270
 },
 {
 "subject": "OCEA",
-"subject_name": "Ocean Sciences",
+"subject_name": "Ocean Sciences (OCEA)",
 "term_code": 2270
 },
 {
 "subject": "PHIL",
-"subject_name": "Philosophy",
+"subject_name": "Philosophy (PHIL)",
 "term_code": 2270
 },
 {
 "subject": "PHYE",
-"subject_name": "Physical Education",
+"subject_name": "Physical Education (PHYE)",
 "term_code": 2270
 },
 {
 "subject": "PHYS",
-"subject_name": "Physics",
+"subject_name": "Physics (PHYS)",
 "term_code": 2270
 },
 {
 "subject": "POLI",
-"subject_name": "Politics",
+"subject_name": "Politics (POLI)",
 "term_code": 2270
 },
 {
 "subject": "PRTR",
-"subject_name": "Porter College",
+"subject_name": "Porter College (PRTR)",
 "term_code": 2270
 },
 {
 "subject": "PSYC",
-"subject_name": "Psychology",
+"subject_name": "Psychology (PSYC)",
 "term_code": 2270
 },
 {
 "subject": "PUNJ",
-"subject_name": "Punjabi",
+"subject_name": "Punjabi (PUNJ)",
 "term_code": 2270
 },
 {
 "subject": "SCIC",
-"subject_name": "Science Communication",
+"subject_name": "Science Communication (SCIC)",
 "term_code": 2270
 },
 {
 "subject": "SOCD",
-"subject_name": "Social Documentation",
+"subject_name": "Social Documentation (SOCD)",
 "term_code": 2270
 },
 {
 "subject": "SOCY",
-"subject_name": "Sociology",
+"subject_name": "Sociology (SOCY)",
 "term_code": 2270
 },
 {
 "subject": "SPAN",
-"subject_name": "Spanish",
+"subject_name": "Spanish (SPAN)",
 "term_code": 2270
 },
 {
 "subject": "SPHS",
-"subject_name": "Spanish for Heritage Speakers",
+"subject_name": "Spanish for Heritage Speakers (SPHS)",
 "term_code": 2270
 },
 {
 "subject": "STAT",
-"subject_name": "Statistics",
+"subject_name": "Statistics (STAT)",
 "term_code": 2270
 },
 {
 "subject": "STEV",
-"subject_name": "Stevenson College",
+"subject_name": "Stevenson College (STEV)",
 "term_code": 2270
 },
 {
 "subject": "THEA",
-"subject_name": "Theater Arts",
+"subject_name": "Theater Arts (THEA)",
 "term_code": 2270
 },
 {
 "subject": "TIM",
-"subject_name": "Technology & Info Management",
+"subject_name": "Technology & Info Management (TIM)",
 "term_code": 2270
 },
 {
 "subject": "UCDC",
-"subject_name": "UCDC",
+"subject_name": "UCDC (UCDC)",
 "term_code": 2270
 },
 {
 "subject": "VAST",
-"subject_name": "Visualizing Abolition Studies",
+"subject_name": "Visualizing Abolition Studies (VAST)",
 "term_code": 2270
 },
 {
 "subject": "WRIT",
-"subject_name": "Writing",
+"subject_name": "Writing (WRIT)",
 "term_code": 2270
 },
 {
 "subject": "YIDD",
-"subject_name": "Yiddish",
+"subject_name": "Yiddish (YIDD)",
 "term_code": 2270
 }
 ]
